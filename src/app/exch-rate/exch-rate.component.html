@@ -3,14 +3,10 @@
       Exchange Rate Selector
     </mat-card-title>
     <mat-card-content >
-        <!-- <div *ngFor="let item of rates | keyvalue">
-            {{item.key}}:{{item.value}}
-        </div> -->
-
         <mat-form-field >
-          <mat-select  placeholder="Base Currency" [(value)]="baseCurrency">
+          <mat-select  placeholder="Current Currency" [(value)]="baseCurrency">
              <mat-option *ngFor="let rate of rates | keyvalue" [value]="rate.key"
-             (click)="onBaseSelect(rate)">
+             (click)="onBaseSelect(rate.key)">
               {{rate.key}}
             </mat-option> 
           </mat-select>
@@ -18,15 +14,17 @@
         <br>  
         <mat-form-field>
             <mat-select  placeholder="New Currency" [(value)]="newCurrency">
-                <mat-option *ngFor="let rate of rates | keyvalue" [value]="rate"
-                (click)="onNewSelect(rate)">
+                <mat-option *ngFor="let rate of rates | keyvalue" [value]="rate.key"
+                (click)="onNewSelect(rate.key)">
                  {{rate.key}}
                </mat-option> 
              </mat-select>
         </mat-form-field>
         <br>
         
-        <h4 *ngIf="newCurrency">ExchangeRate: {{ newCurrency.value }}</h4>
+        <span *ngIf="newCurrency">
+          <strong>ExchangeRate</strong> {{rates[newCurrency]}}
+        </span>
         
         <p></p>
       </mat-card-content>  

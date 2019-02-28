@@ -1,8 +1,6 @@
 import { ApiData } from './../interfaces/apidata';
 import { Component, OnInit } from '@angular/core';
 import { ExchRateService } from '../exch-rate.service';
-import { Key } from 'readline';
-// import { FormControl, Validators } from '@angular/forms';
 
 @Component({
 	selector: 'app-exch-rate',
@@ -13,7 +11,7 @@ export class ExchRateComponent implements OnInit {
 	dataSource: ApiData;
 	rates: Map<string, number>;
 	baseCurrency: string;
-	newCurrency: Map<string, number>;
+	newCurrency: string;
 
 	constructor(private service: ExchRateService) {
 		this.baseCurrency = 'USD';
@@ -29,9 +27,9 @@ export class ExchRateComponent implements OnInit {
 		});
 	}
 
-	onBaseSelect(item: any) {
+	onBaseSelect(item: string) {
 		if (item) {
-			this.baseCurrency = item.key;
+			this.baseCurrency = item;
 			this.service.getRates(this.baseCurrency).subscribe((data) => {
 				this.dataSource = data as ApiData;
 				this.rates = this.dataSource.rates;
@@ -42,10 +40,9 @@ export class ExchRateComponent implements OnInit {
 		console.log('baseCurrency: ', this.baseCurrency);
 	}
 
-	onNewSelect(item: any) {
+	onNewSelect(item: string) {
 		if (item) {
 			this.newCurrency = item;
-
 			console.log('NewCurrency: ', this.newCurrency);
 		}
 	}
