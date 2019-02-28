@@ -23,7 +23,7 @@
         <br>
         
         <span *ngIf="newCurrency">
-          <strong>ExchangeRate</strong> {{rates[newCurrency]}}
+          <strong>ExchangeRate:  </strong> {{rates[newCurrency] | number:'0.2-5'}}
         </span>
         
         <p></p>

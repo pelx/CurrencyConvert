@@ -30,14 +30,13 @@ export class ExchRateComponent implements OnInit {
 	onBaseSelect(item: string) {
 		if (item) {
 			this.baseCurrency = item;
-			this.service.getRates(this.baseCurrency).subscribe((data) => {
+			this.service.getData(this.baseCurrency).subscribe((data) => {
 				this.dataSource = data as ApiData;
 				this.rates = this.dataSource.rates;
-				console.log('Result converted: ', this.rates);
 			});
 		}
 
-		console.log('baseCurrency: ', this.baseCurrency);
+		// console.log('baseCurrency: ', this.baseCurrency);
 	}
 
 	onNewSelect(item: string) {
